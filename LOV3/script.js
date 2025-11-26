@@ -10,6 +10,7 @@ var pY;
 var granularity = 4000
 var mX;
 var my;
+var fColor;
 
 function wavelength(){
   waveform = mySound.getPeaks(granularity);
@@ -47,14 +48,19 @@ function setup() {
 function draw() {
 
   
+
+  
   // console.log(amplitude.getLevel())
   let currentTimeInSeconds = mySound.currentTime(); 
 
-  pX=map(currentTimeInSeconds,0, durationInSeconds, 0, canvWidth) 
-  pY=map(amplitude.getLevel(),0, .25, canvHeight/2,0 ) 
-  
-  point(pX, pY);
-  point(pX, (canvHeight/2)+pY);
+  fColor=map(amplitude.getLevel(),0, .25, 0, canvHeight)
+  pX=map(currentTimeInSeconds,0, durationInSeconds, 0, canvWidth)
+  stroke(255) 
+  line(pX+1, 0, pX+1, canvHeight);
+  stroke(fColor)   
+  line(pX, 0, pX, canvHeight);
+
+
 
 
   
