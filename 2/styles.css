@@ -1,0 +1,147 @@
+*{
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: pitch;
+    src: url(TestPitchSans-Regular.otf);
+}
+
+button{
+    cursor: pointer;
+    border: solid 0px;
+    padding: 12px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    font-family: pitch;
+    font-weight: 600;
+}
+
+button:hover{
+    background-color: black;
+    color: white;
+}
+
+#my-p5-container{
+    height: 600px;;
+    padding-bottom: 12px;;
+    transition:  filter 300ms ease-in-out;
+    cursor: pointer;
+    position: relative;
+    background: rgb(220,220,220);
+}
+
+#my-p5-container:hover{
+    filter: brightness(70%);
+    transition:  filter 300ms ease-in-out;
+}
+
+.title{
+    font-family: pitch;
+    line-height: 77%;
+    font-size: 52px;
+    word-spacing: -20px;
+    padding-bottom: 12px;
+}
+
+.intro{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+.label{
+    width: 340px;
+    font-family: pitch;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -.25px;;
+}
+nav{
+    font-family: pitch;
+    display: flex;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    justify-content: space-between;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-bottom: solid black .5px;
+    margin-bottom: 16px;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+.player{
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+/* Controls focus style */
+.controls-overlay button:focus{outline: none}
+
+/* Scrubber line and timestamp */
+#scrubber-line{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: white;
+    opacity: 1;
+    pointer-events: none;
+    display: none;
+    z-index: 100000;
+}
+
+#scrubber-timestamp{
+    position: absolute;
+    padding: 4px 6px;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    font-family: pitch;
+    font-size: 12px;
+    border-radius: 3px;
+    pointer-events: none;
+    display: none;
+    z-index: 100000;
+}
+
+/* Ensure canvas is below overlays */
+#my-p5-container canvas{
+    position: relative;
+    z-index: 1;
+}
+
+/* group overlay controls */
+.controls-overlay{
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    display: flex;
+    gap: 4px;
+    z-index: 100001;
+}
+
+.controls-overlay button{
+    width: 48px;
+    height: 32px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 4px;
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.controls-overlay .material-icons{font-size:18px;color:black}
+
+/* Controls hover: black fill, white icon */
+.controls-overlay button:hover{
+    background: black;
+}
+.controls-overlay button:hover .material-icons{
+    color: white;
+}

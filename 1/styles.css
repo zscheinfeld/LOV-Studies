@@ -1,0 +1,417 @@
+*{
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: pitch;
+    src: url(TestPitchSans-Regular.otf);
+}
+
+button{
+    cursor: pointer;
+    border: solid 0px;
+    padding: 12px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    font-family: pitch;
+    font-weight: 600;
+}
+
+button:hover{
+    background-color: black;
+    color: white;
+}
+
+#my-p5-container{
+    height: 600px;
+    padding-bottom: 12px;
+    cursor: default;
+    position: relative;
+    background: white;
+}
+
+.title{
+    font-family: pitch;
+    line-height: 77%;
+    font-size: 52px;
+    word-spacing: -20px;
+    padding-bottom: 12px;
+}
+
+.intro{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+.label{
+    width: 340px;
+    font-family: pitch;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -.25px;
+}
+nav{
+    font-family: pitch;
+    display: flex;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    justify-content: space-between;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-bottom: solid black .5px;
+    margin-bottom: 16px;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+.player{
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+/* Controls focus style */
+.controls-overlay button:focus{outline: none}
+
+/* Ensure canvas is below overlays */
+#my-p5-container canvas{
+    position: relative;
+    z-index: 1;
+}
+
+/* group overlay controls */
+.controls-overlay{
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    display: flex;
+    gap: 4px;
+    z-index: 100001;
+}
+
+.controls-overlay button{
+    width: 48px;
+    height: 32px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 4px;
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.controls-overlay .material-icons{font-size:18px;color:black}
+
+/* Controls hover: black fill, white icon */
+.controls-overlay button:hover{
+    background: black;
+}
+.controls-overlay button:hover .material-icons{
+    color: white;
+}
+
+#play{
+    margin-top: 8px;
+    border-radius: 4px;
+}
+
+/* Stroke controls floating panel */
+#stroke-controls{
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 100002;
+    background: rgba(255,255,255,0.92);
+    border-radius: 6px;
+    font-family: pitch;
+    font-size: 11px;
+    min-width: 200px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+#stroke-controls .sc-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 10px;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    user-select: none;
+}
+
+#stroke-controls .sc-header button{
+    width: 28px;
+    height: 24px;
+    padding: 0;
+    background: none;
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+#stroke-controls .sc-header button:hover{
+    background: black;
+    color: white;
+}
+
+#stroke-controls .sc-header button .material-icons{
+    font-size: 16px;
+}
+
+#stroke-controls .sc-header button:hover .material-icons{
+    color: white;
+}
+
+#stroke-controls .sc-body{
+    padding: 4px 10px 10px;
+    border-top: solid 0.5px rgba(0,0,0,0.1);
+}
+
+#stroke-controls .sc-body.collapsed{
+    display: none;
+}
+
+#stroke-controls .sc-row{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+#stroke-controls .sc-row:last-child{
+    margin-bottom: 0;
+}
+
+#stroke-controls .sc-row label{
+    width: 80px;
+    flex-shrink: 0;
+    font-weight: 600;
+    font-size: 10px;
+    text-transform: uppercase;
+    color: #555;
+}
+
+#stroke-controls .sc-row input[type="range"]{
+    flex: 1;
+    height: 3px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #ddd;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+}
+
+#stroke-controls .sc-row input[type="range"]::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: black;
+    cursor: pointer;
+}
+
+#stroke-controls .sc-row select{
+    flex: 1;
+    font-family: pitch;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 4px;
+    border: solid 0.5px #ccc;
+    border-radius: 3px;
+    background: white;
+    cursor: pointer;
+    outline: none;
+}
+
+#stroke-controls .sc-val{
+    width: 32px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-size: 10px;
+    color: #888;
+    flex-shrink: 0;
+}
+
+#stroke-controls .sc-divider{
+    height: 1px;
+    background: rgba(0,0,0,0.08);
+    margin: 8px 0;
+}
+
+#stroke-controls .sc-row input[type="color"]{
+    width: 28px;
+    height: 22px;
+    padding: 1px;
+    border: solid 0.5px #ccc;
+    border-radius: 3px;
+    background: none;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+#stroke-controls .sc-row input[type="color"]::-webkit-color-swatch-wrapper{
+    padding: 1px;
+}
+
+#stroke-controls .sc-row input[type="color"]::-webkit-color-swatch{
+    border: none;
+    border-radius: 2px;
+}
+
+#stroke-controls .sc-row-colors{
+    flex-wrap: wrap;
+}
+
+#stroke-color-list{
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    flex: 1;
+}
+
+#stroke-color-list .stroke-color-swatch{
+    width: 24px;
+    height: 22px;
+    flex-shrink: 0;
+}
+
+#add-stroke-color{
+    width: 24px;
+    height: 22px;
+    padding: 0;
+    background: #eee;
+    border: 0;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+#add-stroke-color .material-icons{
+    font-size: 14px;
+    color: #555;
+}
+
+#add-stroke-color:hover{
+    background: black;
+}
+
+#add-stroke-color:hover .material-icons{
+    color: white;
+}
+
+/* Time scrubber — overlay inside container */
+#time-scrubber{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100001;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    font-family: pitch;
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    color: #555;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    transition: opacity 0.3s ease;
+}
+
+/* In fullscreen: hidden by default, shown via .scrubber-visible class */
+#my-p5-container:fullscreen #time-scrubber{
+    opacity: 0;
+    pointer-events: none;
+}
+
+#my-p5-container:fullscreen #time-scrubber.scrubber-visible{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#time-scrubber input[type="range"]{
+    flex: 1;
+    height: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #ddd;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+}
+
+#time-scrubber input[type="range"]::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: black;
+    cursor: pointer;
+}
+
+/* Audio data panel */
+#audio-data-panel{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px 24px;
+    padding: 16px 0;
+    font-family: pitch;
+    font-size: 12px;
+    border-top: solid black 0.5px;
+    margin-top: 12px;
+}
+
+.audio-datum{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.audio-label{
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-size: 10px;
+    color: #888;
+}
+
+.audio-value{
+    font-variant-numeric: tabular-nums;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.audio-bar{
+    height: 3px;
+    background: #eee;
+    border-radius: 1.5px;
+    overflow: hidden;
+}
+
+.audio-bar-fill{
+    height: 100%;
+    background: black;
+    border-radius: 1.5px;
+    transition: width 50ms linear;
+    width: 0%;
+}
